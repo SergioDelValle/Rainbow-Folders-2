@@ -64,7 +64,7 @@ namespace Borodar.RainbowFolders
                 return;
             }
 
-            AssetDatabase.ImportPackage(packagePath, true);
+            UnityEditor.AssetPackage.Package.Import(packagePath, true);
         }
 
         private static void ExportRuleset(string dirPath, string fileName)
@@ -97,7 +97,8 @@ namespace Borodar.RainbowFolders
             }
 
             var packagePath = $"{dirPath}/{fileName}.unitypackage";
-            AssetDatabase.ExportPackage(textureDependencies, packagePath);
+            var exportParameters = new UnityEditor.AssetPackage.ExportPackageParameters(textureDependencies, packagePath);
+            UnityEditor.AssetPackage.Package.Export(exportParameters);
 
             Log("Package with custom icons successfully exported.");
         }
